@@ -1,0 +1,277 @@
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* ========================= */
+/* Estilos generales */
+/* ========================= */
+
+.page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #333;
+}
+
+.seccion {
+  padding: 4rem 2rem;
+  background: #f9f9f9;
+  color: #333;
+  text-align: center;
+}
+
+.seccion:nth-child(even) {
+  background: #ffffff;
+}
+
+/* ========================= */
+/* Sección principal */
+/* ========================= */
+
+.seccion-principal {
+  background: rgb(255, 75, 68);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  gap: 2rem;
+  padding: 0 4rem;
+  box-sizing: border-box;
+}
+
+.columna-izq {
+  flex: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.columna-der {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  padding-left: 3rem;
+}
+
+.logo-principal {
+  height: 8em;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ========================= */
+/* Título y botones */
+/* ========================= */
+
+.titulo-bienvenida {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.botones-navegacion {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-seccion {
+  background: white;
+  color: rgb(255, 75, 68);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-seccion:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: #f0f0f0;
+}
+
+.btn-seccion:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================= */
+/* Animación del logo */
+/* ========================= */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ========================= */
+/* Sección: Equipos */
+/* ========================= */
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card-equipo {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 230px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-equipo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================= */
+/* Sección: Clasificación */
+/* ========================= */
+
+.tabla-clasificacion {
+  margin: 2rem auto;
+  border-collapse: collapse;
+  width: 85%;
+  max-width: 700px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabla-clasificacion th {
+  background-color: rgb(255, 75, 68);
+  color: white;
+  padding: 0.8rem;
+  font-weight: bold;
+}
+
+.tabla-clasificacion td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+}
+
+.tabla-clasificacion tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* ========================= */
+/* Sección: Noticias */
+/* ========================= */
+
+.noticias-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.noticia {
+  background-color: white;
+  width: 80%;
+  max-width: 700px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.noticia:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.noticia h3 {
+  color: rgb(255, 75, 68);
+}
+
+/* ========================= */
+/* Sección: Estadísticas */
+/* ========================= */
+
+.estadisticas-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.estadistica {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 260px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.estadistica:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.estadistica h3 {
+  color: rgb(255, 75, 68);
+  margin-bottom: 0.8rem;
+}
+
+.estadistica ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ========================= */
+/* Footer */
+/* ========================= */
+
+.footer {
+  background-color: rgb(255, 75, 68);
+  color: white;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}

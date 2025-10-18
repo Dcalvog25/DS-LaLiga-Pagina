@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import logoBlanco from './assets/logo-blanco.png';
 import './App.css';
@@ -8,6 +8,11 @@ function App() {
   const [equipos, setEquipos] = useState([]);
   const [clasificacion, setClasificacion] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [autoScroll, setAutoScroll] = useState(true);
+
+
+  // referencia al carrusel
+  const carouselRef = useRef(null);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -26,14 +31,14 @@ function App() {
         const equiposRes = await axios.get('/api-football/v4/competitions/PD/teams', {
           headers: { 'X-Auth-Token': token }
         });
-        setEquipos(equiposRes.data.teams);
+        setEquipos(equiposRes.data.teams || []);
 
         // Tabla de posiciones
         const tablaRes = await axios.get('/api-football/v4/competitions/PD/standings', {
           headers: { 'X-Auth-Token': token }
         });
 
-        const standings = tablaRes.data.standings[0]?.table || [];
+        const standings = tablaRes.data.standings?.[0]?.table || [];
         setClasificacion(standings);
 
         setLoading(false);
@@ -45,6 +50,61 @@ function App() {
 
     fetchData();
   }, []);
+
+  // Función para botones (izq / der)
+  const scrollCarrusel = (direccion) => {
+    const carrusel = carouselRef.current;
+    if (!carrusel) return;
+
+    const desplazamiento = Math.round(carrusel.clientWidth * 0.7); // desplaza ~70% del viewport del carrusel
+    const nuevoScroll = carrusel.scrollLeft + (direccion === 'left' ? -desplazamiento : desplazamiento);
+
+    carrusel.scrollTo({
+      left: nuevoScroll,
+      behavior: 'smooth',
+    });
+  };
+
+  // Auto-scroll suave usando requestAnimationFrame
+  useEffect(() => {
+    const carrusel = carouselRef.current;
+    if (!carrusel) return;
+
+    let rafId = null;
+    const velocidad = 0.25;
+    let paused = false;
+
+    const step = () => {
+      if (!autoScroll || paused) {
+        rafId = requestAnimationFrame(step);
+        return;
+      }
+
+      carrusel.scrollLeft += velocidad;
+
+      if (carrusel.scrollLeft + carrusel.clientWidth >= carrusel.scrollWidth - 1) {
+        setTimeout(() => {
+          carrusel.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 400);
+      }
+
+      rafId = requestAnimationFrame(step);
+    };
+
+    const onEnter = () => { paused = true; };
+    const onLeave = () => { paused = false; };
+
+    carrusel.addEventListener('mouseenter', onEnter);
+    carrusel.addEventListener('mouseleave', onLeave);
+
+    rafId = requestAnimationFrame(step);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      carrusel.removeEventListener('mouseenter', onEnter);
+      carrusel.removeEventListener('mouseleave', onLeave);
+    };
+  }, [autoScroll, carouselRef]);
 
   return (
     <>
@@ -75,14 +135,48 @@ function App() {
           {loading ? (
             <p>Cargando equipos...</p>
           ) : (
-            <div className="cards-container">
-              {equipos.map((team) => (
-                <div key={team.id} className="card-equipo">
-                  <img src={team.crest} alt={team.name} className="escudo-equipo" />
-                  <h3>{team.name}</h3>
-                  <p>{team.venue}</p>
-                </div>
-              ))}
+            <div className="carousel-container">
+              <button
+                className="carousel-btn left"
+                onClick={() => {
+                  // Pausamos el auto-scroll un momento para que el usuario vea el resultado del click
+                  setAutoScroll(false);
+                  scrollCarrusel('left');
+                  setTimeout(() => setAutoScroll(true), 1500);
+                }}
+                aria-label="Anterior"
+              >
+                ❮
+              </button>
+
+              <div
+                className="cards-container"
+                ref={carouselRef}
+                // onMouseEnter/onMouseLeave gestionados por efecto para consistencia
+              >
+                {equipos.map((team) => (
+                  <div key={team.id} className="card-equipo">
+                    {/* algunos escudos vienen con URLs que requieren ajuste; si fallan, mostra nombre */}
+                    {team.crest ? (
+                      <img src={team.crest} alt={team.name} className="escudo-equipo" />
+                    ) : null}
+                    <h3>{team.name}</h3>
+                    <p>{team.venue}</p>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="carousel-btn right"
+                onClick={() => {
+                  setAutoScroll(false);
+                  scrollCarrusel('right');
+                  setTimeout(() => setAutoScroll(true), 1500);
+                }}
+                aria-label="Siguiente"
+              >
+                ❯
+              </button>
             </div>
           )}
         </div>
@@ -96,12 +190,16 @@ function App() {
             <table className="tabla-clasificacion">
               <thead>
                 <tr>
-                  <th>Pos</th>
+                  <th>Posición</th>
                   <th>Equipo</th>
-                  <th>PTS</th>
-                  <th>G</th>
-                  <th>E</th>
-                  <th>P</th>
+                  <th>Puntos</th>
+                  <th>PJ</th>
+                  <th>PG</th>
+                  <th>PE</th>
+                  <th>PP</th>
+                  <th>GF</th>
+                  <th>GC</th>
+                  <th>DG</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,19 +207,26 @@ function App() {
                   <tr key={row.team.id}>
                     <td>{row.position}</td>
                     <td className="equipo-nombre">
-                      <img src={row.team.crest} alt={row.team.name} className="mini-escudo" />
+                      {row.team.crest && (
+                        <img src={row.team.crest} alt={row.team.name} className="mini-escudo" />
+                      )}
                       {row.team.name}
                     </td>
                     <td>{row.points}</td>
+                    <td>{row.playedGames}</td>
                     <td>{row.won}</td>
                     <td>{row.draw}</td>
                     <td>{row.lost}</td>
+                    <td>{row.goalsFor}</td>
+                    <td>{row.goalsAgainst}</td>
+                    <td>{row.goalDifference}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
         </div>
+
 
         {/* SECCIÓN NOTICIAS */}
         <div className="seccion" id="noticias">

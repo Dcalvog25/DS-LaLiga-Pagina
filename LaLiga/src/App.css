@@ -1,23 +1,41 @@
+/* ========================= */
+/* Variables CSS y Reset */
+/* ========================= */
+
+:root {
+  --laliga-red: #ff4b44;
+  --laliga-dark: #1a1a1a;
+  --laliga-white: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-light: #888888;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fb;
+  --bg-tertiary: #f0f2f5;
+  --shadow-light: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --border-radius: 8px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
-  text-align: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: var(--text-primary);
+  overflow-x: hidden;
 }
 
 /* ========================= */
@@ -28,39 +46,82 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #fff;
-  color: #333;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .seccion {
-  padding: 4rem 2rem;
-  background: #f9f9f9;
-  color: #333;
+  padding: 5rem 2rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .seccion:nth-child(even) {
-  background: #ffffff;
+  background: var(--bg-primary);
+}
+
+.seccion h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--laliga-red);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.seccion h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--laliga-red);
+  border-radius: 2px;
+}
+
+.seccion p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
 }
 
 /* ========================= */
-/* Sección principal */
+/* Sección principal - Hero */
 /* ========================= */
 
 .seccion-principal {
-  background: linear-gradient(135deg, rgb(255, 75, 68) 0%, rgb(220, 40, 40) 100%);
+  background: linear-gradient(135deg, var(--laliga-red) 0%, #e63946 50%, #d62828 100%);
   color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  gap: 2rem;
+  gap: 3rem;
   padding: 0 4rem;
-  box-sizing: border-box;
   position: relative;
   overflow: hidden;
+}
+
+.seccion-principal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></svg>') repeat;
+  background-size: 100px 100px;
+  animation: float 20s linear infinite;
+  pointer-events: none;
 }
 
 .columna-izq {
@@ -80,369 +141,246 @@
   align-items: flex-start;
   justify-content: center;
   text-align: left;
-  padding-left: 3rem;
   position: relative;
   z-index: 2;
 }
 
 .logo-principal {
   height: 10em;
-  animation: float 3s ease-in-out infinite;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-  margin-bottom: 2rem;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+  animation: logoFloat 4s ease-in-out infinite, logoGlow 2s ease-in-out infinite alternate;
+  transition: var(--transition);
 }
 
-/* ========================= */
-/* Partículas de fondo */
-/* ========================= */
-
-.particulas-fondo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+.logo-principal:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4));
 }
 
-.particula {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  animation: floatParticle 6s ease-in-out infinite;
-}
-
-.particula-1 { width: 8px; height: 8px; top: 20%; left: 10%; animation-delay: 0s; }
-.particula-2 { width: 12px; height: 12px; top: 40%; left: 20%; animation-delay: 1s; }
-.particula-3 { width: 6px; height: 6px; top: 60%; left: 80%; animation-delay: 2s; }
-.particula-4 { width: 10px; height: 10px; top: 30%; left: 70%; animation-delay: 3s; }
-.particula-5 { width: 14px; height: 14px; top: 70%; left: 30%; animation-delay: 0.5s; }
-.particula-6 { width: 8px; height: 8px; top: 80%; left: 60%; animation-delay: 1.5s; }
-.particula-7 { width: 12px; height: 12px; top: 15%; left: 85%; animation-delay: 2.5s; }
-.particula-8 { width: 6px; height: 6px; top: 50%; left: 15%; animation-delay: 3.5s; }
-.particula-9 { width: 10px; height: 10px; top: 25%; left: 50%; animation-delay: 0.8s; }
-.particula-10 { width: 8px; height: 8px; top: 75%; left: 75%; animation-delay: 1.8s; }
-
-@keyframes floatParticle {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-  33% { transform: translateY(-30px) rotate(120deg); opacity: 0.8; }
-  66% { transform: translateY(15px) rotate(240deg); opacity: 0.5; }
-}
-
-/* ========================= */
-/* Estadísticas animadas */
-/* ========================= */
-
-.stats-container {
+/* Estadísticas en tiempo real */
+.stats-hero {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: rgba(255, 255, 255, 0.15);
-  padding: 1rem;
-  border-radius: 12px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  min-width: 80px;
+  border-radius: var(--border-radius);
+  padding: 1rem 1.5rem;
+  text-align: center;
+  min-width: 120px;
+  transition: var(--transition);
+}
+
+.stat-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-5px);
 }
 
 .stat-number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: block;
+  color: var(--laliga-white);
 }
 
 .stat-label {
   font-size: 0.9rem;
   opacity: 0.9;
-  margin-top: 0.2rem;
+  font-weight: 500;
 }
 
 /* ========================= */
-/* Texto hero mejorado */
+/* Título y botones del Hero */
 /* ========================= */
 
-.texto-hero {
-  margin-bottom: 2rem;
+.titulo-bienvenida {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+  color: white;
 }
 
-.titulo-principal {
-  font-size: 4rem;
-  font-weight: 900;
-  margin: 0;
-  line-height: 1.1;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.4);
-}
-
-.palabra-destacada {
-  background: linear-gradient(45deg, #fff, #ffeb3b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.subtitulo {
-  font-size: 1.8rem;
-  font-weight: 300;
-  margin: 0.5rem 0;
-  opacity: 0.95;
-  letter-spacing: 2px;
-}
-
-.descripcion-hero {
-  font-size: 1.2rem;
-  line-height: 1.6;
+.subtitle-hero {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
   opacity: 0.9;
   max-width: 500px;
-  margin: 1.5rem 0;
+  line-height: 1.6;
 }
-
-/* ========================= */
-/* Frases rotativas */
-/* ========================= */
-
-.frases-rotativas {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1rem 1.5rem;
-  border-radius: 25px;
-  border-left: 4px solid #ffeb3b;
-  margin: 1.5rem 0;
-  backdrop-filter: blur(5px);
-}
-
-.frase-actual {
-  font-style: italic;
-  font-size: 1.1rem;
-  opacity: 0.95;
-}
-
-/* ========================= */
-/* Botones mejorados */
-/* ========================= */
-
-.btn-seccion {
-  background: rgba(255, 255, 255, 0.95);
-  color: rgb(255, 75, 68);
-  border: none;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  backdrop-filter: blur(10px);
-}
-
-.btn-primary {
-  background: linear-gradient(45deg, #fff, #f8f8f8);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.btn-accent {
-  background: linear-gradient(45deg, #ffeb3b, #ffc107);
-  color: #333;
-}
-
-.btn-seccion:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* ========================= */
-/* Información de temporada */
-/* ========================= */
-
-.temporada-info {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.temporada-badge {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.estado-live {
-  background: #ff4444;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* ========================= */
-/* Elementos flotantes */
-/* ========================= */
-
-.elementos-flotantes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.elemento-flotante {
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0.6;
-  animation: floatElement 8s ease-in-out infinite;
-}
-
-.balon {
-  top: 20%;
-  right: 15%;
-  animation-delay: 0s;
-}
-
-.trofeo {
-  bottom: 25%;
-  left: 10%;
-  animation-delay: 2s;
-}
-
-.estrella {
-  top: 70%;
-  right: 30%;
-  animation-delay: 4s;
-}
-
-@keyframes floatElement {
-  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-  25% { transform: translateY(-20px) rotate(90deg) scale(1.1); }
-  50% { transform: translateY(-10px) rotate(180deg) scale(0.9); }
-  75% { transform: translateY(-15px) rotate(270deg) scale(1.05); }
-}
-
-/* ========================= */
-/* Animaciones de entrada */
-/* ========================= */
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideRight {
-  from { 
-    opacity: 0; 
-    transform: translateX(-50px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
-}
-
-@keyframes slideUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-@keyframes scaleIn {
-  from { 
-    opacity: 0; 
-    transform: scale(0.8); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-}
-
-.animate-fade-in {
-  opacity: 0;
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-slide-right {
-  opacity: 0;
-  animation: slideRight 0.8s ease-out forwards;
-}
-
-.animate-slide-up {
-  opacity: 0;
-  animation: slideUp 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-  opacity: 0;
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-up {
-  opacity: 0;
-  animation: slideUp 0.6s ease-out forwards;
-}
-
-/* ========================= */
-/* Título y botones actualizados */
-/* ========================= */
 
 .botones-navegacion {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.btn-seccion {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--laliga-red);
+  border: 2px solid transparent;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.btn-seccion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.btn-seccion:hover::before {
+  left: 100%;
+}
+
+.btn-seccion:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-heavy);
+  background: white;
+  border-color: var(--laliga-gold);
+}
+
+.btn-seccion:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Botón especial CTA */
+.btn-primary {
+  background: var(--laliga-dark);
+  color: white;
+  font-weight: 700;
+  box-shadow: var(--shadow-heavy);
+}
+
+.btn-primary:hover {
+  background: #000;
+  transform: translateY(-3px) scale(1.05);
 }
 
 /* ========================= */
-/* Animación del logo */
+/* Animaciones */
 /* ========================= */
 
-@keyframes float {
+@keyframes logoFloat {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes logoGlow {
+  0% {
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 15px 35px rgba(255, 215, 0, 0.4));
+  }
+}
+
+@keyframes textShine {
+  0%, 100% {
+    background-position: 0% 50%;
   }
   50% {
-    transform: translateY(-10px);
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 /* ========================= */
 /* Sección: Equipos */
 /* ========================= */
+
+.seccion-equipos {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+}
+
+.seccion-equipos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 75, 68, 0.05), transparent);
+}
+
 .carousel-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  padding: 2rem 0;
 }
 
 .cards-container {
@@ -450,144 +388,158 @@
   gap: 2rem;
   overflow-x: auto;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Oculta la barra en Firefox */
-  padding: 1rem 2rem;
+  scrollbar-width: none;
+  padding: 2rem;
+  mask: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
 }
 
 .cards-container::-webkit-scrollbar {
-  display: none; /* Oculta barra en Chrome/Safari */
+  display: none;
 }
 
 .card-equipo {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  min-width: 230px;
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  min-width: 280px;
   flex: 0 0 auto;
-  text-align: left;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 75, 68, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-equipo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--laliga-red), var(--laliga-gold), var(--laliga-red));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card-equipo:hover::before {
+  transform: scaleX(1);
 }
 
 .card-equipo:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-heavy);
+  border-color: var(--laliga-red);
 }
 
 .escudo-equipo {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
   display: block;
-  margin-bottom: 0.8rem;
+  margin: 0 auto 1.5rem;
+  transition: var(--transition);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.card-equipo:hover .escudo-equipo {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.card-equipo h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--laliga-red);
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+}
+
+.card-equipo p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.team-stats {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 75, 68, 0.1);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.team-stat {
+  text-align: center;
+}
+
+.team-stat-value {
+  font-weight: 700;
+  color: var(--laliga-red);
+  display: block;
+}
+
+.team-stat-label {
+  color: var(--text-light);
+  font-size: 0.75rem;
 }
 
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background: var(--laliga-red);
   color: white;
   border: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  transition: var(--transition);
   z-index: 10;
-  user-select: none;
+  box-shadow: var(--shadow-medium);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .carousel-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background: var(--laliga-dark);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: var(--shadow-heavy);
 }
 
 .carousel-btn.left {
-  left: 10px;
+  left: 20px;
 }
 
 .carousel-btn.right {
-  right: 10px;
+  right: 20px;
 }
 
-/* Animación suave cuando entra el mouse */
-.cards-container:hover .card-equipo {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Indicadores de progreso del carousel */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .card-equipo {
-    min-width: 180px;
-    padding: 1rem;
-  }
+.indicator {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 75, 68, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: var(--transition);
+}
 
-  .escudo-equipo {
-    width: 50px;
-    height: 50px;
-  }
-
-  .carousel-btn {
-    font-size: 1.5rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  /* Responsivo para sección principal */
-  .seccion-principal {
-    flex-direction: column;
-    padding: 2rem 1rem;
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .columna-izq, .columna-der {
-    flex: 1;
-    width: 100%;
-    padding: 1rem 0;
-  }
-
-  .columna-der {
-    padding-left: 0;
-    text-align: center;
-    align-items: center;
-  }
-
-  .titulo-principal {
-    font-size: 2.5rem;
-  }
-
-  .subtitulo {
-    font-size: 1.3rem;
-  }
-
-  .descripcion-hero {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  .stats-container {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .botones-navegacion {
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .btn-seccion {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .logo-principal {
-    height: 6em;
-  }
-
-  .elementos-flotantes {
-    display: none; /* Oculta elementos flotantes en móvil */
-  }
+.indicator.active {
+  background: var(--laliga-red);
 }
 
 
@@ -595,127 +547,3921 @@
 /* Sección: Clasificación */
 /* ========================= */
 
-.tabla-clasificacion {
-  margin: 2rem auto;
-  border-collapse: collapse;
-  width: 95%; /* ocupa casi todo el ancho */
-  max-width: 1200px; /* límite superior para pantallas muy grandes */
-  border-radius: 10px;
-  overflow: hidden;
-  table-layout: auto; /* permite que las columnas se ajusten al contenido */
+.seccion-clasificacion {
+  background: var(--bg-primary);
+  position: relative;
 }
 
-.tabla-clasificacion th,
-.tabla-clasificacion td {
-  border: 1px solid #ddd;
-  padding: 1rem 1.2rem; /* más espacio horizontal y vertical */
-  text-align: center; /* centra los números */
+.tabla-container {
+  max-width: 1400px;
+  margin: 3rem auto;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+  border: 1px solid rgba(255, 75, 68, 0.1);
+}
+
+.tabla-clasificacion {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
 }
 
 .tabla-clasificacion th {
-  background-color: rgb(255, 75, 68);
+  background: linear-gradient(135deg, var(--laliga-red), #e63946);
   color: white;
-  font-weight: bold;
+  font-weight: 700;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.tabla-clasificacion tr:nth-child(even) {
-  background-color: #f2f2f2;
+.tabla-clasificacion td {
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-/* Ajusta el logo dentro de la columna de equipo */
+.tabla-clasificacion tr {
+  transition: var(--transition);
+}
+
+.tabla-clasificacion tbody tr:hover {
+  background: rgba(255, 75, 68, 0.05);
+  transform: scale(1.01);
+}
+
+/* Posiciones especiales */
+.tabla-clasificacion tbody tr:nth-child(-n+4) td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #22c55e;
+}
+
+.tabla-clasificacion tbody tr:nth-child(5) td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #3b82f6;
+}
+
+.tabla-clasificacion tbody tr:nth-child(6) td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #f59e0b;
+}
+
+.tabla-clasificacion tbody tr:nth-child(n+18) td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ef4444;
+}
+
+.tabla-clasificacion td:first-child {
+  position: relative;
+  font-weight: 700;
+  color: var(--laliga-red);
+}
+
 .equipo-nombre {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* espacio entre logo y nombre */
+  gap: 0.5rem;
   justify-content: flex-start;
+  font-weight: 600;
 }
 
 .mini-escudo {
-  height: 30px;
-  width: 30px; /* fuerza proporción cuadrada */
+  height: 24px;
+  width: 24px;
   object-fit: contain;
+}
+
+/* Estadísticas destacadas */
+.stat-highlight {
+  font-weight: 700;
+  color: var(--laliga-red);
+}
+
+.goal-difference-positive {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.goal-difference-negative {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Leyenda de la tabla */
+.table-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 20px;
+  height: 12px;
+  border-radius: 6px;
+}
+
+.legend-champions {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+.legend-europa {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+.legend-conference {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.legend-relegation {
+  background: linear-gradient(135deg, #f87171, #ef4444);
 }
 
 
 /* ========================= */
-/* Sección: Noticias */
+/* Sección: Partidos en Vivo */
 /* ========================= */
 
-.noticias-container {
+.matches-section {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+.matches-section h3 {
+  color: var(--laliga-red);
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.matches-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.match-card {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.match-card.featured {
+  background: linear-gradient(135deg, var(--laliga-red), #e63946);
+  color: white;
+  grid-row: span 2;
+}
+
+.match-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--laliga-red);
+}
+
+.match-status {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.match-status.live {
+  background: #ff0000;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+.match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.team.away {
+  flex-direction: row-reverse;
+}
+
+.team-badge {
+  font-size: 1.2rem;
+}
+
+.team-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.team-score {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.match-vs {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0 1rem;
+}
+
+.match-time, .match-date, .match-venue {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.match-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-action {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+}
+
+.btn-action:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-action.secondary {
+  background: transparent;
+}
+
+/* ========================= */
+/* Estadísticas de Temporada */
+/* ========================= */
+
+.season-stats {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.stats-header h3 {
+  color: var(--laliga-red);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.stats-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab {
+  background: transparent;
+  border: 2px solid var(--bg-tertiary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.tab.active {
+  background: var(--laliga-red);
+  border-color: var(--laliga-red);
+  color: white;
+}
+
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.stats-overview .stat-item {
+  text-align: center;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background: var(--bg-secondary);
+}
+
+.stats-overview .stat-label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stats-overview .stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--laliga-red);
+}
+
+/* ========================= */
+/* Líderes LaLiga */
+/* ========================= */
+
+.leaders-section {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+.leaders-section h3 {
+  color: var(--laliga-red);
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.leader-category {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border-left: 4px solid var(--laliga-red);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.category-icon {
+  font-size: 1.2rem;
+}
+
+.category-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.leader-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.leader-position {
+  background: var(--laliga-red);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.leader-info {
+  flex: 1;
+}
+
+.leader-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.leader-team {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.leader-stat {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--laliga-red);
+}
+
+.leader-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.leader-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.leader-item .pos {
+  color: var(--text-light);
+  font-weight: 600;
+  width: 20px;
+}
+
+.leader-item .name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.leader-item .stat {
+  font-weight: 700;
+  color: var(--laliga-red);
+}
+
+.btn-view-all {
+  background: transparent;
+  color: var(--laliga-red);
+  border: 2px solid var(--laliga-red);
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-view-all:hover {
+  background: var(--laliga-red);
+  color: white;
+}
+
+/* ========================= */
+/* Sección: Noticias Destacadas */
+/* ========================= */
+
+.news-container {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.news-header h3 {
+  color: var(--laliga-red);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.news-card {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.news-card.featured {
+  grid-row: span 2;
+  background: white;
+  box-shadow: var(--shadow-medium);
+}
+
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--laliga-red);
+}
+
+.news-image-container {
+  position: relative;
+  height: 180px;
+  background: linear-gradient(135deg, var(--laliga-red), #e63946);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.news-card.featured .news-image-container {
+  height: 250px;
+}
+
+.news-category-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.news-image {
+  font-size: 3rem;
+  color: white;
+  opacity: 0.8;
+}
+
+.news-content {
+  padding: 1.5rem;
+}
+
+.news-card:not(.featured) .news-content {
+  padding: 1rem;
+}
+
+.news-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.news-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.news-card:not(.featured) .news-title {
+  font-size: 1rem;
+}
+
+.news-excerpt {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.news-card:not(.featured) .news-excerpt {
+  font-size: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Videos Section */
+.videos-section {
+  border-top: 1px solid var(--bg-tertiary);
+  padding-top: 2rem;
+}
+
+.videos-section h4 {
+  color: var(--laliga-red);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-card {
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.video-thumbnail {
+  position: relative;
+  height: 140px;
+  background: linear-gradient(135deg, #333, #555);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button {
+  font-size: 2rem;
+  color: white;
+  opacity: 0.8;
+}
+
+.video-duration {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.video-info {
+  padding: 1rem;
+}
+
+.video-info h5 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.video-info p {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.live-section {
+  background: linear-gradient(135deg, var(--laliga-red), #e63946);
+  color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.live-badge {
+  background: white;
+  color: var(--laliga-red);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.match-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.team {
+  text-align: center;
+}
+
+.team-name {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.vs {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* ========================= */
+/* Sección: Estadísticas Dinámicas */
+/* ========================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-light);
+  border-left: 4px solid var(--laliga-red);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.stat-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  color: var(--laliga-red);
+}
+
+.stat-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--laliga-red);
+  margin-bottom: 0.5rem;
+}
+
+.stat-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.player-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-light);
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 75, 68, 0.1);
+}
+
+.player-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--laliga-red);
+}
+
+.player-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.player-team {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.player-stat {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--laliga-red);
+}
+
+/* ========================= */
+/* ========================= */
+/* Footer Compacto */
+/* ========================= */
+
+.footer-compact {
+  background: linear-gradient(135deg, var(--laliga-dark) 0%, #2d2d2d 100%);
+  color: white;
+  padding: 2.5rem 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-compact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff4b44' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zM10 30c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  z-index: 1;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.footer-brand-text h3 {
+  color: var(--laliga-red);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+}
+
+.footer-brand-text p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-section h4 {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  position: relative;
+}
+
+.footer-section h4::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--laliga-red);
+  border-radius: 1px;
+}
+
+.footer-link {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 0.3rem 0;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.footer-link:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legal-link {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.legal-link:hover {
+  color: var(--laliga-red);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .footer-compact {
+    padding: 2rem 1rem 1rem;
+  }
+  
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-nav {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .footer-brand {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .footer-legal {
+    justify-content: center;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .seccion-principal {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  
+  .columna-izq,
+  .columna-der {
+    flex: none;
+  }
+  
+  .columna-der {
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+  }
+  
+  .titulo-bienvenida {
+    font-size: 2.5rem;
+  }
+  
+  .botones-navegacion {
+    justify-content: center;
+  }
+  
+  .stats-hero {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .seccion {
+    padding: 3rem 1rem;
+  }
+  
+  .seccion h2 {
+    font-size: 2rem;
+  }
+  
+  .carousel-btn {
+    display: none;
+  }
+  
+  .cards-container {
+    padding: 1rem;
+  }
+  
+  .card-equipo {
+    min-width: 250px;
+  }
+  
+  .tabla-container {
+    margin: 2rem 0.5rem;
+    overflow-x: auto;
+  }
+  
+  .tabla-clasificacion {
+    font-size: 0.8rem;
+    min-width: 600px;
+  }
+  
+  .tabla-clasificacion th,
+  .tabla-clasificacion td {
+    padding: 0.5rem 0.3rem;
+  }
+  
+  /* Nuevos estilos responsivos */
+  .matches-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .match-card.featured {
+    grid-row: span 1;
+  }
+  
+  .stats-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .stats-tabs {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .stats-overview {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .leaders-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .news-card.featured {
+    grid-row: span 1;
+  }
+  
+  .news-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .botones-navegacion {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  .btn-seccion {
+    width: 200px;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Ajustes específicos para componentes de LaLiga */
+  .matches-section,
+  .season-stats,
+  .leaders-section,
+  .news-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* ===== NUEVOS ESTILOS PARA CONTENIDO MEJORADO ===== */
+
+/* Centro de Noticias Mejorado */
+.news-center {
+  margin: 4rem auto;
+  max-width: 1400px;
+  padding: 0 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.section-header h3 {
+  font-size: 2.8rem;
+  color: var(--laliga-dark);
+  margin: 0;
+  background: linear-gradient(135deg, var(--laliga-red), #ff6b64);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.news-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid transparent;
+  background: white;
+  color: var(--text-secondary);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--laliga-red);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,75,68,0.3);
+}
+
+/* Hero News Section */
+.news-hero-section {
+  margin-bottom: 4rem;
+}
+
+.news-hero-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.news-hero-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+}
+
+.news-hero-image {
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-hero-card:hover .hero-image {
+  transform: scale(1.05);
+}
+
+.news-overlay {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.news-category.premium {
+  background: linear-gradient(135deg, var(--laliga-red), #ff6b64);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(255,75,68,0.3);
+}
+
+.read-time {
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(10px);
+}
+
+.news-hero-content {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-meta-hero {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.news-hero-content h2 {
+  font-size: 2.2rem;
+  line-height: 1.3;
+  margin: 0 0 1.5rem 0;
+  color: var(--laliga-dark);
+}
+
+.news-lead {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.news-tags {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: rgba(255,75,68,0.1);
+  color: var(--laliga-red);
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.news-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-read-more {
+  background: var(--laliga-red);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-read-more:hover {
+  background: #e03d36;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,75,68,0.3);
+}
+
+.btn-share,
+.btn-bookmark {
+  background: rgba(255,75,68,0.1);
+  color: var(--laliga-red);
+  border: 1px solid rgba(255,75,68,0.2);
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-share:hover,
+.btn-bookmark:hover {
+  background: var(--laliga-red);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Grid de noticias secundarias */
+.news-secondary-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.news-column h4 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--laliga-dark);
+  position: relative;
+  padding-left: 1rem;
+}
+
+.news-column h4:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--laliga-red);
+  border-radius: 2px;
+}
+
+.news-card-enhanced {
+  display: flex;
+  gap: 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.news-card-enhanced:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+}
+
+.news-image-enhanced {
+  position: relative;
+  flex-shrink: 0;
+  width: 140px;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.news-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-indicator {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+}
+
+.news-content-enhanced h4 {
+  font-size: 1.1rem;
+  margin: 0 0 0.8rem 0;
+  color: var(--laliga-dark);
+  line-height: 1.4;
+  padding-left: 0;
+}
+
+.news-content-enhanced h4:before {
+  display: none;
+}
+
+.news-content-enhanced .news-category {
+  background: rgba(255,75,68,0.1);
+  color: var(--laliga-red);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  display: inline-block;
+}
+
+.news-content-enhanced p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.news-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Trending Section */
+.trending-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.trending-section h4 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.trending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trending-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255,75,68,0.02);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.trending-item:hover {
+  background: rgba(255,75,68,0.05);
+  transform: translateX(4px);
+}
+
+.trending-rank {
+  background: var(--laliga-red);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.trending-content h5 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+  color: var(--laliga-dark);
+}
+
+.trending-stats {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Social Feed */
+.social-feed {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.social-feed h4 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.social-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.social-post {
+  padding: 1rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.social-post:hover {
+  border-color: rgba(255,75,68,0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.social-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  padding: 2px;
+}
+
+.post-info .account {
+  font-weight: bold;
+  color: var(--laliga-dark);
+  display: block;
+  font-size: 0.9rem;
+}
+
+.post-info .time {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.social-post p {
+  margin: 0 0 0.8rem 0;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.post-engagement {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Section Footer */
+.section-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.btn-view-all {
+  background: var(--laliga-red);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-view-all:hover {
+  background: #e03d36;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,75,68,0.3);
+}
+
+.btn-view-all.secondary {
+  background: white;
+  color: var(--laliga-red);
+  border: 2px solid var(--laliga-red);
+}
+
+.btn-view-all.secondary:hover {
+  background: var(--laliga-red);
+  color: white;
+}
+
+/* Sección de Partidos Mejorada */
+.matches-hero {
+  background: linear-gradient(135deg, var(--laliga-red) 0%, #ff6b64 100%);
+  color: white;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  border-radius: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.matches-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.matches-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.matches-hero h3 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.matches-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-match {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-match::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, var(--laliga-red), #ff6b64);
+}
+
+.match-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.match-title {
+  font-size: 2rem;
+  color: var(--laliga-dark);
+  margin: 0 0 0.5rem 0;
+}
+
+.match-info {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.match-teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.team {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.team:hover .team-logo {
+  transform: scale(1.1);
+}
+
+.team-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--laliga-dark);
+  text-align: center;
+}
+
+.match-vs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.vs-text {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.match-score {
+  background: var(--laliga-red);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.match-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.match-detail {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255,75,68,0.02);
+  border-radius: 12px;
+}
+
+.match-detail h4 {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.match-detail p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--laliga-dark);
+  margin: 0;
+}
+
+/* Lista de próximos partidos */
+.upcoming-matches {
+  margin: 3rem 0;
+}
+
+.upcoming-matches h4 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--laliga-dark);
+  text-align: center;
+}
+
+.matches-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.match-card-compact {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.match-card-compact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+}
+
+.match-date {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.compact-teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.compact-team {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.compact-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.compact-name {
+  font-weight: bold;
+  color: var(--laliga-dark);
+  font-size: 0.95rem;
+}
+
+.compact-vs {
+  margin: 0 1rem;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.match-time {
+  text-align: center;
+  font-weight: bold;
+  color: var(--laliga-red);
+  font-size: 1.1rem;
+}
+
+/* Jugadores Destacados Mejorados */
+.leaders-showcase {
+  margin: 4rem 0;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(255,75,68,0.02) 0%, rgba(255,255,255,1) 100%);
+  border-radius: 24px;
+}
+
+.leaders-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.leaders-header h3 {
+  font-size: 2.5rem;
+  color: var(--laliga-dark);
+  margin: 0 0 1rem 0;
+  background: linear-gradient(135deg, var(--laliga-red), #ff6b64);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.leaders-header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.leaders-categories {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid transparent;
+  background: white;
+  color: var(--text-secondary);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.category-btn:hover,
+.category-btn.active {
+  background: var(--laliga-red);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,75,68,0.3);
+}
+
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.leader-card-enhanced {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.leader-card-enhanced:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.leader-rank {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--laliga-red);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(255,75,68,0.3);
+}
+
+.leader-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.leader-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.leader-card-enhanced:hover .leader-photo {
+  transform: scale(1.08);
+}
+
+.team-badge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 35px;
+  height: 35px;
+  background: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.badge-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.leader-info {
+  padding: 2rem;
+}
+
+.leader-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--laliga-dark);
+  margin: 0 0 0.5rem 0;
+}
+
+.leader-position {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.leader-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255,75,68,0.05);
+  border-radius: 12px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.3rem;
+}
+
+.market-value {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255,75,68,0.08);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.market-value .value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+}
+
+.market-value .label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+/* Responsive Design para nuevos componentes */
+@media (max-width: 1024px) {
+  .news-secondary-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .news-hero-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .news-hero-image {
+    height: 250px;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .match-teams {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .match-vs {
+    margin: 1rem 0;
+  }
+  
+  .leaders-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .matches-list {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .news-center {
+    padding: 0 1rem;
+  }
+  
+  .section-header h3 {
+    font-size: 2.2rem;
+  }
+  
+  .news-hero-content {
+    padding: 2rem;
+  }
+  
+  .news-hero-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .news-card-enhanced {
+    flex-direction: column;
+  }
+  
+  .news-image-enhanced {
+    width: 100%;
+    height: 180px;
+  }
+  
+  .leaders-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .matches-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .matches-hero h3 {
+    font-size: 2rem;
+  }
+  
+  .matches-hero p {
+    font-size: 1rem;
+  }
+}
+
+/* ===== ESTILOS COMPACTOS - SIN ESPACIADO EXCESIVO ===== */
+
+/* Sección compacta para estadísticas */
+.seccion-compacta {
+  padding: 2rem 2rem;
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.seccion-compacta h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.stats-overview-compact {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.stat-item-compact {
+  text-align: center;
+}
+
+.stat-number-compact {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+  line-height: 1;
+}
+
+.stat-label-compact {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+/* Líderes compactos */
+.leaders-section-compact {
+  padding: 2rem 2rem;
+  background: white;
+}
+
+.leaders-section-compact h3 {
+  font-size: 1.8rem;
+  color: var(--laliga-red);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.loading-simple {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-secondary);
+}
+
+.leaders-container-compact {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.scorers-list {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.scorer-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.scorer-item:last-child {
+  border-bottom: none;
+}
+
+.scorer-rank {
+  background: var(--laliga-red);
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.scorer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.scorer-badge {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.scorer-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.scorer-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.scorer-team {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.scorer-stats {
+  text-align: right;
+}
+
+.goals {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+  display: block;
+}
+
+.matches {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.standings-compact {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.standings-compact h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.standings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.standing-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.standing-item:hover {
+  background: rgba(255,75,68,0.05);
+}
+
+.position {
+  font-weight: bold;
+  color: var(--laliga-red);
+  width: 20px;
+  text-align: center;
+}
+
+.team-crest-mini {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.team-name-mini {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.points {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+/* Partidos compactos */
+.matches-section-compact {
+  padding: 2rem 2rem;
+  background: var(--bg-secondary);
+}
+
+.matches-section-compact h3 {
+  font-size: 1.8rem;
+  color: var(--laliga-red);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.matches-list-compact {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.match-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.match-row:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+
+.match-time-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.match-date-compact {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.match-hour {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+}
+
+.teams-vs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.team-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team-logo-tiny {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.team-abbr-compact {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vs-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: bold;
+  padding: 0.3rem 0.8rem;
+  background: rgba(255,75,68,0.1);
+  border-radius: 12px;
+}
+
+.match-actions-mini {
+  min-width: 120px;
+  text-align: right;
+}
+
+.venue-mini {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive para secciones compactas */
+@media (max-width: 768px) {
+  .stats-overview-compact {
+    gap: 1.5rem;
+  }
+  
+  .stat-number-compact {
+    font-size: 2rem;
+  }
+  
+  .leaders-container-compact {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .match-row {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .teams-vs {
+    order: -1;
+  }
+  
+  .match-time-info,
+  .match-actions-mini {
+    min-width: auto;
+  }
+}
+
+/* Próximos Partidos - Con datos reales del API */
+.matches-section {
+  padding: 3rem 2rem;
+  background: var(--bg-secondary);
+}
+
+.loading-matches {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.competition-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.comp-btn {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #ddd;
+  background: white;
+  color: var(--text-secondary);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.comp-btn.active {
+  background: var(--laliga-red);
+  color: white;
+  border-color: var(--laliga-red);
+}
+
+.matches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
-.noticia {
-  background-color: white;
-  width: 80%;
-  max-width: 700px;
+.match-card {
+  background: white;
+  border-radius: 12px;
   padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
 }
 
-.noticia:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+.match-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
-.noticia h3 {
-  color: rgb(255, 75, 68);
-}
-
-/* ========================= */
-/* Sección: Estadísticas */
-/* ========================= */
-
-.estadisticas-container {
+.match-date-header {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.match-teams {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.team-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.team-section.home {
+  justify-content: flex-start;
+}
+
+.team-section.away {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.team-badge-match {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #f8f9fa;
+  padding: 4px;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team-section.away .team-info {
+  align-items: center;
+}
+
+.team-name-short {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  background: rgba(255,75,68,0.1);
+  margin-bottom: 0.3rem;
+}
+
+.team-name-full {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.match-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.vs-indicator {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 2px solid #eee;
+  border-radius: 20px;
+}
+
+.score-indicator {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+  padding: 0.5rem 1rem;
+  background: rgba(255,75,68,0.1);
+  border-radius: 12px;
+}
+
+.match-status {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.status-badge.resultado {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.status-badge.directo {
+  background: #fff2e6;
+  color: #fa541c;
+}
+
+.status-badge.previa {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.match-venue {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.section-footer-matches {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-view-all-results {
+  background: transparent;
+  color: var(--laliga-red);
+  border: 2px solid var(--laliga-red);
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-view-all-results:hover {
+  background: var(--laliga-red);
+  color: white;
+}
+
+/* Líderes LaLiga - Simplificado sin imágenes problemáticas */
+.leaders-section {
+  padding: 3rem 2rem;
+  background: white;
+}
+
+.loading-leaders {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.leaders-grid-simple {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
-.estadistica {
-  background: #fff;
+.leader-category-simple {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #f0f2f5;
+}
+
+.category-header-simple {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,75,68,0.1);
+  border-radius: 50%;
+}
+
+.stat-info-simple {
+  flex: 1;
+}
+
+.stat-label-simple {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-leader-simple {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.stat-number-simple {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--laliga-red);
+  line-height: 1;
+}
+
+.leaders-list-simple {
+  padding: 1.5rem;
+}
+
+.leader-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.leader-item:last-child {
+  border-bottom: none;
+}
+
+.leader-item:hover {
+  background: rgba(255,75,68,0.02);
+  padding-left: 0.5rem;
+  border-radius: 8px;
+}
+
+.leader-position {
+  font-size: 1rem;
+  color: var(--laliga-red);
+  font-weight: bold;
+  width: 30px;
+  text-align: center;
+  background: rgba(255,75,68,0.1);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leader-team-badge {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #f8f9fa;
+  padding: 3px;
+}
+
+.leader-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.leader-player-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.leader-team-name {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.leader-stat {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--laliga-red);
+  background: rgba(255,75,68,0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.category-btn-simple {
+  background: var(--laliga-red);
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  border-top: 1px solid #f0f2f5;
+}
+
+.category-btn-simple:hover {
+  background: #e03d36;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255,75,68,0.2);
+}
+
+/* Noticias - Diseño simplificado */
+.news-section {
+  padding: 3rem 2rem;
+  background: var(--bg-secondary);
+}
+
+.news-section h3 {
+  font-size: 2.2rem;
+  color: var(--laliga-red);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.news-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.news-card.main-news {
+  grid-column: span 2;
+}
+
+.news-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.news-card.main-news .news-image {
+  height: 250px;
+}
+
+.news-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-image img {
+  transform: scale(1.05);
+}
+
+.news-category-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--laliga-red);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.news-content {
+  padding: 1.5rem;
+}
+
+.news-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.news-content h3 {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin: 0 0 0.8rem 0;
+  line-height: 1.4;
+}
+
+.news-content h4 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin: 0 0 0.8rem 0;
+  line-height: 1.4;
+}
+
+.news-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.section-footer-news {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.section-footer-news .btn-view-all {
+  background: var(--laliga-red);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.section-footer-news .btn-view-all:hover {
+  background: #e03d36;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255,75,68,0.3);
+}
+
+/* Responsive para nuevos componentes */
+@media (max-width: 1024px) {
+  .matches-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  .leaders-grid-simple {
+    grid-template-columns: 1fr;
+  }
+  
+  .news-card.main-news {
+    grid-column: span 1;
+  }
+  
+  .match-teams {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .team-section.away {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .matches-section,
+  .leaders-section,
+  .news-section {
+    padding: 2rem 1rem;
+  }
+  
+  .competition-filters {
+    justify-content: center;
+  }
+  
+  .comp-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .match-card {
+    padding: 1rem;
+  }
+  
+  .team-badge-match {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .team-name-short {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .team-name-full {
+    font-size: 0.7rem;
+    max-width: 100px;
+  }
+  
+  .stat-number-simple {
+    font-size: 2rem;
+  }
+  
+  .category-header-simple {
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .leader-item {
+    gap: 0.8rem;
+  }
+  
+  .leader-team-badge {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .leader-position {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== ESTILOS FIFA - ELEMENTOS LLAMATIVOS ===== */
+
+/* Sección estadísticas estilo FIFA - Manteniendo sintonía con LaLiga */
+.stats-fifa-style {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #f0f2f5 100%);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 2rem;
+}
+
+.stats-fifa-style::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff4b44' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zM10 30c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20-20-8.954-20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  z-index: 1;
+}
+
+.section-header-fifa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.fifa-badge {
+  background: linear-gradient(45deg, var(--laliga-red), #ff6b44);
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 15px rgba(255, 75, 68, 0.3);
+  animation: pulse-fifa 2s infinite;
+}
+
+.section-header-fifa h2 {
+  color: var(--laliga-red);
+  margin-bottom: 0;
+}
+
+.section-header-fifa h2::after {
+  display: none;
+}
+
+@keyframes pulse-fifa {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.section-decoration {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--laliga-red), transparent);
+  border-radius: 2px;
+}
+
+/* Cards de estadísticas FIFA - Más coherente */
+.stats-overview-fifa {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card-fifa {
+  background: white;
+  border: 2px solid transparent;
   border-radius: 12px;
   padding: 1.5rem;
-  width: 260px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow-light);
 }
 
-.estadistica:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.stat-card-fifa:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--laliga-red);
 }
 
-.estadistica h3 {
-  color: rgb(255, 75, 68);
+.stat-card-fifa.primary {
+  border-color: rgba(255, 75, 68, 0.2);
+}
+
+.stat-card-fifa.secondary {
+  border-color: rgba(0, 150, 255, 0.2);
+}
+
+.stat-card-fifa.accent {
+  border-color: rgba(50, 205, 50, 0.2);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+  text-align: center;
+}
+
+.stat-content {
+  text-align: center;
+}
+
+.stat-number-fifa {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--laliga-red);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label-fifa {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 75, 68, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+
+.stat-card-fifa:hover .card-shine {
+  opacity: 1;
+  animation: shine-effect 0.6s ease;
+}
+
+@keyframes shine-effect {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Sección líderes FIFA - Más compacta */
+.leaders-section-fifa {
+  position: relative;
+  z-index: 2;
+}
+
+.section-title-fifa {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title-badge {
+  background: linear-gradient(45deg, var(--laliga-red), #ff6b44);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.section-title-fifa h3 {
+  color: var(--laliga-red);
+  font-size: 1.8rem;
+  margin-bottom: 0;
+}
+
+.section-title-fifa h3::after {
+  display: none;
+}
+
+.leaders-container-fifa {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.scorers-fifa-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* FIFA Player Cards - Más compactas */
+.fifa-player-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fifa-player-card.gold {
+  border-color: #FFD700;
+}
+
+.fifa-player-card.silver {
+  border-color: #C0C0C0;
+}
+
+.fifa-player-card.bronze {
+  border-color: #CD7F32;
+}
+
+.fifa-player-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 60px;
+}
+
+.player-rating {
+  background: linear-gradient(45deg, var(--laliga-red), #ff6b44);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  min-width: 45px;
+  text-align: center;
+}
+
+.card-type {
+  background: rgba(255, 75, 68, 0.1);
+  color: var(--laliga-red);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.player-image-section {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 80px;
+}
+
+.team-badge-fifa {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.rank-badge {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: #000;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.player-info-fifa {
+  flex: 1;
+}
+
+.player-name-fifa {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.team-name-fifa {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
   margin-bottom: 0.8rem;
 }
 
-.estadistica ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  line-height: 1.6;
+.player-stats-fifa {
+  display: flex;
+  gap: 1.5rem;
 }
 
-/* ========================= */
-/* Footer */
-/* ========================= */
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
 
-.footer {
-  background-color: rgb(255, 75, 68);
-  color: white;
+.card-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,75,68,0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fifa-player-card:hover .card-glow {
+  opacity: 1;
+}
+
+/* Clasificación FIFA sidebar - Coherente */
+.standings-fifa-sidebar {
+  background: white;
+  border: 2px solid rgba(255, 75, 68, 0.1);
+  border-radius: 12px;
   padding: 1.5rem;
-  font-size: 0.9rem;
+  box-shadow: var(--shadow-light);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.sidebar-icon {
+  font-size: 1.5rem;
+}
+
+.sidebar-header h4 {
+  color: var(--laliga-red);
+  margin: 0;
+}
+
+.standings-list-fifa {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.standing-item-fifa {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: var(--bg-secondary);
+}
+
+.standing-item-fifa.position-champion {
+  border-left: 4px solid #22c55e;
+}
+
+.standing-item-fifa.position-europa {
+  border-left: 4px solid #3b82f6;
+}
+
+.standing-item-fifa.position-conference {
+  border-left: 4px solid #f59e0b;
+}
+
+.standing-item-fifa:hover {
+  background: rgba(255, 75, 68, 0.05);
+  transform: translateX(3px);
+}
+
+.position-fifa {
+  color: var(--laliga-red);
+  font-weight: bold;
+  width: 25px;
   text-align: center;
 }
+
+.team-crest-fifa {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.team-info-fifa {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-name-fifa {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.points-fifa {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Sección partidos FIFA */
+.matches-section-fifa {
+  background: linear-gradient(135deg, #f8f9fb 0%, #e9ecef 100%);
+  padding: 3rem 2rem;
+  position: relative;
+}
+
+.section-header-matches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.matches-badge {
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+}
+
+.live-indicator {
+  background: linear-gradient(45deg, #ff0040, #ff4060);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: pulse-live 1.5s infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.loading-fifa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 75, 68, 0.1);
+  border-top: 3px solid var(--laliga-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.matches-fifa-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* FIFA Match Cards */
+.fifa-match-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.fifa-match-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  border-color: var(--laliga-red);
+}
+
+.match-header-fifa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.match-date-fifa {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.match-time-fifa {
+  color: var(--laliga-red);
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.match-status {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.match-teams-fifa {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.team-fifa {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team-fifa.away {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.team-logo-fifa {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.team-details-fifa {
+  flex: 1;
+}
+
+.team-name-match {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.team-form {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.vs-section-fifa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.vs-circle {
+  background: linear-gradient(45deg, var(--laliga-red), #ff6b44);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(255, 75, 68, 0.3);
+}
+
+.match-prediction {
+  text-align: center;
+}
+
+.prediction-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.prediction-bars {
+  display: flex;
+  gap: 2px;
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.home-bar {
+  background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.draw-bar {
+  background: linear-gradient(90deg, #ffc107, #fd7e14);
+}
+
+.away-bar {
+  background: linear-gradient(90deg, #dc3545, #e83e8c);
+}
+
+.match-footer-fifa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+}
+
+.venue-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.venue-icon {
+  font-size: 1.1rem;
+}
+
+.match-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.watch-btn {
+  background: linear-gradient(45deg, var(--laliga-red), #ff6b44);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.watch-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 75, 68, 0.4);
+}
+
+.card-glow-match {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,75,68,0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.fifa-match-card:hover .card-glow-match {
+  opacity: 1;
+}
+
+/* Responsive FIFA */
+@media (max-width: 768px) {
+  .stats-overview-fifa {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .leaders-container-fifa {
+    grid-template-columns: 1fr;
+  }
+  
+  .scorers-fifa-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .matches-fifa-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .match-teams-fifa {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .team-fifa.away {
+    flex-direction: row;
+    text-align: center;
+  }
+  
+  .vs-section-fifa {
+    order: -1;
+  }
+}
+

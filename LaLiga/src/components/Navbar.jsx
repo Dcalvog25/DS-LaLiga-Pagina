@@ -30,6 +30,11 @@ function Navbar() {
     setMenuOpen(false);
   };
 
+  const handleToggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    if (!menuOpen) setHidden(false);
+  };
+
   const handleSetMenuOpen = (state) => {
     setMenuOpen(state);
     if (state) setHidden(false);
@@ -38,19 +43,37 @@ function Navbar() {
   return (
     <>
       <nav className={`navbar ${hidden && !menuOpen ? "hide" : ""}`}>
-        <a className="logo-container" href="/">
+        <a className="logo-container" href="#inicio">
           <img src={logo} alt="Logo LaLiga" className="logo" />
           <h1 className="title">LaLiga</h1>
         </a>
 
-        <div className={`links ${menuOpen ? "show" : ""}`}>
-          <a href="/" className="link" onClick={handleCloseMenu}>Inicio</a>
-          <a href="/clientes" className="link" onClick={handleCloseMenu}>Equipos</a>
-          <a href="/proveedores" className="link" onClick={handleCloseMenu}>Tabla</a>
-          <a href="/inventarios" className="link" onClick={handleCloseMenu}>Calendario</a>
-          <a href="/ventas" className="link" onClick={handleCloseMenu}>Eventos</a>
-          <a href="/estadisticas" className="link" onClick={handleCloseMenu}>Info</a>
+        <div className="navbar-right">
+          <div className={`links ${menuOpen ? "show" : ""}`}>
+            <a href="#inicio" className="link" onClick={handleCloseMenu}>Inicio</a>
+            <a href="#equipos" className="link" onClick={handleCloseMenu}>Equipos</a>
+            <a href="#clasificacion" className="link" onClick={handleCloseMenu}>Tabla</a>
+            <a href="#estadisticas" className="link" onClick={handleCloseMenu}>Estadísticas</a>
+            <a href="#noticias" className="link" onClick={handleCloseMenu}>Noticias</a>
+          </div>
+          
+          <div className={`navbar-actions ${menuOpen ? "show" : ""}`}>
+            <select className="language-selector">
+              <option value="es">🇪🇸 ES</option>
+              <option value="en">🇬🇧 EN</option>
+              <option value="fr">🇫🇷 FR</option>
+              <option value="pt">🇵🇹 PT</option>
+            </select>
+            
+            <a href="#" className="mi-liga-btn">
+              👤 MI LIGA
+            </a>
+          </div>
         </div>
+
+        <button className="menu-btn" onClick={handleToggleMenu}>
+          {menuOpen ? "✕" : "☰"}
+        </button>
       </nav>
 
       {hidden && !menuOpen && (

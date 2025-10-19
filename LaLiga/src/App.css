@@ -188,10 +188,11 @@ body {
   color: var(--laliga-white);
 }
 
-.stat-label {
-  font-size: 0.9rem;
-  opacity: 0.9;
+.stat-number2 {
+  font-size: 1rem;
   font-weight: 500;
+  display: block;
+  color: var(--laliga-white);
 }
 
 /* ========================= */
